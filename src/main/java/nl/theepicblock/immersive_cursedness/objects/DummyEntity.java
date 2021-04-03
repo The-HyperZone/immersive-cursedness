@@ -1,7 +1,7 @@
 package nl.theepicblock.immersive_cursedness.objects;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.class_5459;
+import net.minecraft.world.PortalUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.nbt.CompoundTag;
@@ -67,14 +67,14 @@ public class DummyEntity extends Entity {
         } else {
             double coordinateScale = DimensionType.method_31109(this.world.getDimension(), destination.getDimension());
             BlockPos blockPos3 = new BlockPos(this.getX() * coordinateScale, this.getY(), this.getZ() * coordinateScale);
-            Optional<class_5459.class_5460> portalPosA = this.method_30330(destination, blockPos3, bl3);
+            Optional<PortalUtil.Rectangle> portalPosA = this.method_30330(destination, blockPos3, bl3);
             if (portalPosA.isPresent()) {
                 BlockState blockState = Util.getBlockAsync((ServerWorld)this.world, this.lastNetherPortalPosition);
                 Direction.Axis axis2;
                 Vec3d vec3d2;
                 if (blockState.contains(Properties.HORIZONTAL_AXIS)) {
                     axis2 = blockState.get(Properties.HORIZONTAL_AXIS);
-                    class_5459.class_5460 portalPos = class_5459.method_30574(this.lastNetherPortalPosition, axis2, 21, Direction.Axis.Y, 21, (blockPos) -> Util.getBlockAsync((ServerWorld)this.world, blockPos) == blockState);
+                    PortalUtil.Rectangle portalPos = PortalUtil.getLargestRectangle(this.lastNetherPortalPosition, axis2, 21, Direction.Axis.Y, 21, (blockPos) -> Util.getBlockAsync((ServerWorld)this.world, blockPos) == blockState);
                     vec3d2 = this.method_30633(axis2, portalPos);
                 } else {
                     return null;
