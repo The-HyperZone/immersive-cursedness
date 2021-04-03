@@ -11,7 +11,6 @@ import java.util.Map;
 public class CursednessServer {
     private final MinecraftServer server;
     private volatile boolean isServerActive = true;
-    private long nextTick;
     private int tickCount;
     private final Map<ServerPlayerEntity, PlayerManager> playerManagers = new HashMap<>();
     private final Config config = AutoConfig.getConfigHolder(Config.class).getConfig();
